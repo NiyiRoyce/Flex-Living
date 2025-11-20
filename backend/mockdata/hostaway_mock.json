@@ -5,7 +5,7 @@
       "id": 7453,
       "type": "host-to-guest",
       "status": "published",
-      "rating": null,
+      "rating": 10,
       "publicReview": "Shane and family are wonderful! Would definitely host again :)",
       "reviewCategory": [
         {
@@ -29,7 +29,7 @@
       "id": 7454,
       "type": "host-to-guest",
       "status": "published",
-      "rating": null,
+      "rating": 9.33,
       "publicReview": "Great guests! Very clean and respectful. Highly recommend.",
       "reviewCategory": [
         {
@@ -53,7 +53,7 @@
       "id": 7455,
       "type": "host-to-guest",
       "status": "pending",
-      "rating": null,
+      "rating": 7.67,
       "publicReview": "Nice stay, but could improve communication about check-in procedures.",
       "reviewCategory": [
         {
@@ -77,7 +77,7 @@
       "id": 7456,
       "type": "host-to-guest",
       "status": "published",
-      "rating": null,
+      "rating": 10,
       "publicReview": "Absolutely fantastic guests! Left the place spotless and were very communicative throughout.",
       "reviewCategory": [
         {
@@ -101,7 +101,7 @@
       "id": 7457,
       "type": "host-to-guest",
       "status": "rejected",
-      "rating": null,
+      "rating": 6.67,
       "publicReview": "Had some issues with noise complaints from neighbors.",
       "reviewCategory": [
         {
@@ -120,6 +120,54 @@
       "submittedAt": "2020-11-05 11:20:18",
       "guestName": "David Thompson",
       "listingName": "Studio A - Central London"
+    },
+    {
+      "id": 7458,
+      "type": "host-to-guest",
+      "status": "published",
+      "rating": 9,
+      "publicReview": "Very polite guests. Easy communication and left everything tidy.",
+      "reviewCategory": [
+        {
+          "category": "cleanliness",
+          "rating": 9
+        },
+        {
+          "category": "communication",
+          "rating": 9
+        },
+        {
+          "category": "respect_house_rules",
+          "rating": 9
+        }
+      ],
+      "submittedAt": "2020-11-20 13:12:44",
+      "guestName": "Liam Brown",
+      "listingName": "1B S2 C - Thames View Apartment"
+    },
+    {
+      "id": 7459,
+      "type": "host-to-guest",
+      "status": "published",
+      "rating": 8.33,
+      "publicReview": "Good stay overall, minor issues with late check-in.",
+      "reviewCategory": [
+        {
+          "category": "cleanliness",
+          "rating": 8
+        },
+        {
+          "category": "communication",
+          "rating": 9
+        },
+        {
+          "category": "respect_house_rules",
+          "rating": 8
+        }
+      ],
+      "submittedAt": "2020-12-01 10:05:00",
+      "guestName": "Sophia Martinez",
+      "listingName": "2B N1 A - 29 Shoreditch Heights"
     }
   ]
 }

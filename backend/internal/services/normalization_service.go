@@ -66,7 +66,7 @@ func (s *NormalizationService) normalizeHostawayReview(review models.HostawayRev
 			ApprovedBy:     "",  // optional
 			RejectionReason: "", // optional
 		},
-		Channel: review.Channel, // for frontend filtering
+		
 	}
 }
 
