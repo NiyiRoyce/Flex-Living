@@ -26,11 +26,13 @@ func (s *NormalizationService) NormalizeHostawayReviews(reviews []models.Hostawa
 
 // normalizeHostawayReview converts a single Hostaway review
 func (s *NormalizationService) normalizeHostawayReview(review models.HostawayReview) models.NormalizedReview {
-	// Calculate overall rating from categories
 	overallRating := s.calculateOverallRating(review)
 
-	// Parse submission date
-	submittedAt, _ := time.Parse("2006-01-02 15:04:05", review.SubmittedAt)
+	// Parse submittedAt safely
+	var submittedAt time.Time
+	if t, err := time.Parse("2006-01-02 15:04:05", review.SubmittedAt); err == nil {
+		submittedAt = t
+	}
 
 	// Convert categories to map
 	categories := make(map[string]float64)
@@ -38,8 +40,12 @@ func (s *NormalizationService) normalizeHostawayReview(review models.HostawayRev
 		categories[cat.Category] = cat.Rating
 	}
 
-	// Extract property ID from listing name (simplified)
+	// Simplified property ID extraction
 	propertyID := s.extractPropertyID(review.ListingName)
+
+	// Determine approval status
+	isApproved := review.Status == "published"
+	isRejected := review.Status == "rejected"
 
 	return models.NormalizedReview{
 		ID:           fmt.Sprintf("hostaway-%d", review.ID),
@@ -53,13 +59,18 @@ func (s *NormalizationService) normalizeHostawayReview(review models.HostawayRev
 		SubmittedAt:  submittedAt,
 		Status:       s.mapStatus(review.Status),
 		ApprovalStatus: models.ApprovalStatus{
-			IsApproved: review.Status == "published",
-			IsRejected: review.Status == "rejected",
+			IsApproved:     isApproved,
+			IsRejected:     isRejected,
+			ApprovedAt:     nil, // could set if you track approval dates
+			RejectedAt:     nil,
+			ApprovedBy:     "",  // optional
+			RejectionReason: "", // optional
 		},
+		Channel: review.Channel, // for frontend filtering
 	}
 }
 
-// calculateOverallRating computes average from category ratings
+// calculateOverallRating computes average rating from categories if main rating is null
 func (s *NormalizationService) calculateOverallRating(review models.HostawayReview) float64 {
 	if review.Rating != nil {
 		return *review.Rating
@@ -77,13 +88,12 @@ func (s *NormalizationService) calculateOverallRating(review models.HostawayRevi
 	return sum / float64(len(review.ReviewCategory))
 }
 
-// extractPropertyID extracts a property identifier from listing name
+// extractPropertyID generates a simple property ID
 func (s *NormalizationService) extractPropertyID(listingName string) string {
-	// Simple extraction - in production, use regex or database mapping
 	if listingName == "" {
 		return "unknown"
 	}
-	return fmt.Sprintf("prop-%d", len(listingName)) // Simplified ID generation
+	return fmt.Sprintf("prop-%d", len(listingName))
 }
 
 // mapStatus converts Hostaway status to normalized status
